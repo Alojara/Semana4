@@ -1,0 +1,71 @@
+HOLA
+<br>
+<app-mostrar-imagen [imagen]="ima"></app-mostrar-imagen>
+<app-mostrar-imagen [imagen]="imagen2"></app-mostrar-imagen>
+<app-mostrar-imagen [imagen]="imagen3"></app-mostrar-imagen>
+<app-mostrar-imagen [imagen]="imagen4"></app-mostrar-imagen>
+<br>
+{{elementosGuardados.length}}
+<section>
+  <fieldset>
+
+    <label for="">Nombre de la imagen</label>
+    <input type="text"
+    name="Nombre"
+    [value]="nuevoHistorial.nombre"
+    (input)="cambiarNombre($event)"
+    >
+    <p>{{nuevoHistorial.nombre}}</p>
+  </fieldset>
+  <fieldset>
+    <label for="">Detalle de la imagen</label>
+    <textarea
+    name=""
+    [value]="nuevoHistorial.detalle"
+    (input)="cambiarDetalle($event)"
+    cols="30"
+    row="10"
+    ></textarea>
+    <p>{{nuevoHistorial.detalle}}</p>
+  </fieldset>
+  <fieldset>
+    <label for="">URL de la imagen</label>
+    <input
+    type="url"
+    name="imagen"
+    [value]="nuevoHistorial.imagen"
+    (input)="cambiarImagen($event)"
+    >
+    <app-mostrar-imagen [imagen]="nuevoHistorial.imagen"></app-mostrar-imagen>
+  </fieldset>
+  <fieldset>
+    <button
+    type="button"
+    role="button"
+    (click)="guardarHistorial()"
+    > Guardar </button>
+  </fieldset>
+</section>
+<section>
+  <article *ngFor="let item of elementosGuardados">
+    <app-mostrar-imagen [imagen]="item.imagen"></app-mostrar-imagen>
+
+    <h2 *ngIf="item.nombre; then aquiIf; else aquiElse"></h2>
+    <ng-template #aquiIf>
+    <h2>{{item.nombre}}</h2>
+    </ng-template>
+    <ng-template #aquiElse>
+      <h2>Sin Nombre</h2>
+    </ng-template>
+
+    <p *ngIf="item.detalle; then aquif; else aquelse"></p>
+    <ng-template #aquif>
+      <h2>{{item.detalle}}</h2>
+      </ng-template>
+      <ng-template #aquelse>
+        <h2>Sin Detalle</h2>
+      </ng-template>
+
+
+  </article>
+</section>
